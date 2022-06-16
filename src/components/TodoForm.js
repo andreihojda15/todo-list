@@ -1,7 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 export const TodoForm = (props) => {
     const [input, setInput] = useState('')
+
+    const inputRef = useRef(null)
+
+    useEffect(() => {
+        // keep input focused even after refreshing page
+        inputRef.current.focus()
+    })
 
     const handleChange = e => {
         setInput(e.target.value)
@@ -30,6 +37,7 @@ export const TodoForm = (props) => {
                 name='text'
                 className='todo-input'
                 onChange={handleChange}
+                ref={inputRef}
             />
             <button className='todo-button'>Add to-do</button>
         </form>
